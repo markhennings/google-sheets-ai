@@ -9,6 +9,15 @@ function generateCacheKey(parts) {
   return 'openai_chat:' + hash.toString();
 }
 
+/**
+ * Calls the OpenAI Chat API. Returns cached response when possible.
+ * @constructor
+ * @param {string} prompt Instructions for the LLM
+ * @param {string} system System prompt instructions
+ * @param {number} temperature 0 to 1 value to control randomness
+ * @return OpenAI's API response.
+ * @customfunction
+ */
 function OPENAI_CHAT(prompt, system="", temperature=0) {
   var cache = CacheService.getScriptCache();
   var cacheKey = generateCacheKey([prompt, system, temperature.toString()]);
